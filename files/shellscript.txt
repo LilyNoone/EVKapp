@@ -1,0 +1,65 @@
+#!/bin/bash
+clear
+
+echo "Begonnen met ophalen van oud en nieuw ip..."
+
+function NieuwIP() {
+awk ' BEGIN {
+while (("/sbin/ifconfig" | getline array[a++]) > 0) {
+}
+
+for (x in array) {
+if (array[x] ~ /eth0/) {
+z = split(array[x + 1], arr, ":")
+gsub(/[^0-9.]+/,"",arr[2]); print arr[2]
+}
+}
+}'
+return
+}
+
+
+function OudIP() {
+sv="/tmp/OudIP.sv"
+parm=$1
+if [ -z "$parm" ] ; then
+NieuwIP > $sv
+elif [ "$parm" = "oud" ] ; then
+OudIP=`cat $sv`
+export OudIP
+fi
+
+return
+}
+
+echo "Processing..."
+
+oip= OudIP oud
+nip='NieuwIP'
+
+echo "Ben je op school? y/n: "
+read line
+a="$line"
+
+cp -f /etc/named.conf /var/named/backup/named.conf.backup
+
+awk '{ if (a == y) cat /var/named/backup/named.conf.backup | sed '/'"// forwarders { 10.123.14.2; 10.123.14.3; };"'/s/'"// forwarders { 10.123.14.2; 10.123.14.3; };"'/'"forwarders { 10.123.14.2; 10.123.14.3; };"'/' > /etc/named.conf;
+ else
+ cat /var/named/backup/named.conf.backup | sed '/'"forwarders { 10.123.14.2; 10.123.14.3; };"'/s/'"forwarders { 10.123.14.2; 10.123.14.3; };"'/'"// forwarders { 10.123.14.2; 10.123.14.3; };"'/' > /etc/named.conf; }'
+
+cat /var/named/backup/named.conf.backup | sed '/'"$oip"'/s/'"$oip"'/'"$nip"'/' > /etc/named.conf
+echo "Ips veranderen in /etc/named.conf"
+
+cp -f /etc/httpd/conf/httpd.conf /var/named/backup/httpd.conf.backup
+cat /var/named/backup/httpd.conf.backup | sed '/'"$oip"'/s/'"$oip"'/'"$nip"'/' > /etc/httpd/conf/httpd.conf
+echo "Ips veranderen in: /etc/httpd/conf/httpd.conf"
+
+cp -f /var/named/base.zone /var/named/backup/base.zone.backup
+cat /var/named/backup/base.zone.backup | sed '/'"$oip"'/s/'"$oip"'/'"$nip"'/' > /var/named/base.zone
+echo "Ips veranderen in var/named/base.zone"
+
+service httpd restart
+service named restart
+
+done
+echo "Done"

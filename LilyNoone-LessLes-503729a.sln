@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Web Developer Express 2010
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "LilyNoone-LessLes-503729a", ".", "{744D0FEB-304F-4826-BFDB-BB9DF5B25141}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/LilyNoone-LessLes-503729a"
+		Debug.AspNetCompiler.PhysicalPath = "..\LilyNoone-LessLes-503729a\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\LilyNoone-LessLes-503729a\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/LilyNoone-LessLes-503729a"
+		Release.AspNetCompiler.PhysicalPath = "..\LilyNoone-LessLes-503729a\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\LilyNoone-LessLes-503729a\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "51126"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{744D0FEB-304F-4826-BFDB-BB9DF5B25141}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{744D0FEB-304F-4826-BFDB-BB9DF5B25141}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
